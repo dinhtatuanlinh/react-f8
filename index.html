@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script
+            src="https://unpkg.com/react@17/umd/react.development.js"
+            crossorigin
+        ></script>
+        <script
+            src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+            crossorigin
+        ></script>
+        <!-- sử dụng jsx bằng cách sử dụng babel -->
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <title>ReactJS</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            // const h1React = React.createElement('h1',{
+            //     title: 'hello',
+            //     className: 'heading'
+            // }, 'hello guys!')
+            // // createElement gồm có 3 đối số là type, props và children
+            // // đối số type có thể là string, hoặc function/class
+            // //
+            // const ulReact = React.createElement(
+            //     'ul',
+            //     {
+            //         id: 'ul-id',
+            //         style: {color:'red',fontsize:'30px'}
+            //     },
+            //     React.createElement(
+            //         'li', null, 'Javascript'
+            //     ),
+            //     React.createElement(
+            //         'li', {}, 'ReactJS'
+            //     )
+            // )
+            // const fragment = React.createElement(
+            //     React.Fragment,
+            //     null,
+            //     h1React,
+            //     ulReact,
+            // )
+            // const jsx = (
+            // <React.Fragment>
+            //     <div style={{color: 'red'}}>abc</div>
+            // </React.Fragment>
+            // )
+            // // get root element
+            const root = document.getElementById("root");
+            // // render react
+            // ReactDOM.render(h1React, root)
+            // ReactDOM.render(fragment, root)
+            // ReactDOM.render(jsx, root);
+
+            // #########################
+            // function trong react
+            // ##########################
+            // let Header = (props) => {
+            //     // bằng cách truyền vào hàm vào component ta có thể truyền ngược tham số từ component con ra component cha
+            //     if(typeof props.callback === "function")
+            //     props.callback(Math.random());
+            //     return <div className="heaer">{props.content}</div>;
+            // };
+            // class Content extends React.Component {
+            //     render() {
+            //         return <div className="content">content</div>;
+            //     }
+            // }
+            // let Footer = () => {
+            //     return <div className="footer">footer</div>;
+            // };
+
+            // class ReceiveParamsFromChildComponent extends React.Component {
+            //     getData(data){
+            //         console.log(data)
+            //     }
+            //     render() {
+            //         return (
+            //             <React.Fragment>
+            //             <Header
+            //             content="header"
+            //             callback={(data) => {
+            //                 this.getData(data);
+            //             }}
+            //         />
+            //             </React.Fragment>
+            //         )
+            //     }
+            // }
+            // const App = ()=>{
+
+            //     return (
+            //         <React.Fragment>
+            //         <Header
+            //             content="header"
+                        
+            //         />
+            //         <Content />
+            //         <Footer />
+            //         <ReceiveParamsFromChildComponent />
+            //     </React.Fragment>
+            //     )
+            // }
+
+            // ReactDOM.render(<App/>, root);
+            // ##################
+            // jsx in funtion
+            // ##################
+            let Form = {
+                Input(){
+                    return (
+                        <input />
+                    )
+                },
+                Checkbox(){
+                    return (
+                        <input type="checkbox" />
+                    )
+                }
+            }
+            // bằng cách đăt biến Component ta có thể thay đổi thẻ từ button sang thẻ a hay bất cứ thẻ nào khác
+
+            function Button(
+                {title, href, onClick}
+            ){
+                let Component = 'button';
+                const props ={};
+                // nếu href có tồn tại thì đổi button thành thẻ a
+                if(href){
+                    Component = 'a';
+                    props.href = href
+                }
+                if(onClick){
+                    props.onClick = onClick
+                }
+                return (
+                    <Component {...props}>{title}</Component>
+                )
+            }
+            const App =()=>{
+                let type = 'Input';
+                let Component = Form[type];
+                return (
+                    <React.Fragment>
+                        {
+                        // <Form.Input />
+                        // <Form.Checkbox />
+                        // <Component />
+                        }
+                        
+                        <Button 
+                            title="Click me!"
+                            // href="nodeatext.com"
+                            onClick={()=>console.log(Math.random())}
+                        />
+                    </React.Fragment>
+                )
+            }
+            ReactDOM.render(<App/>, root)
+        </script>
+    </body>
+</html>
